@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Doctor Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <script>
+        // Redirect based on user role
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            window.location.href = 'auth.html';
+        } else if (user.role === 'patient') {
+            window.location.href = 'patient-dashboard.html?section=profile';
+        } else if (user.role === 'doctor') {
+            window.location.href = 'doctor-dashboard.html?section=profile';
+        }
+    </script>
+    <p>Redirecting...</p>
+</body>
+</html>

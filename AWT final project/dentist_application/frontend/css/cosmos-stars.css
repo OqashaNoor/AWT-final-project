@@ -1,0 +1,78 @@
+/**
+ * Site-wide drifting star overlay (shown when html.cosmos-night is set).
+ * Loaded via style.css, patient-dashboard.css, and smile-doctor-dashboard.css imports.
+ */
+
+#scStarfield.cosmos-starfield,
+#scStarfield {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    min-height: 100%;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.55s ease;
+}
+
+html.cosmos-night #scStarfield {
+    opacity: 1;
+}
+
+#scStarfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 90% 55% at 50% -8%,
+        rgba(175, 255, 238, 0.07) 0%,
+        transparent 56%
+    );
+}
+
+html.cosmos-night .stars {
+    display: none;
+}
+
+.sc-star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(245, 255, 251, 0.95);
+    box-shadow: 0 0 6px rgba(184, 255, 238, 0.35);
+    width: 2px;
+    height: 2px;
+    animation-name: sc-star-drift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: var(--sc-anim-dur, 38s);
+    animation-delay: var(--sc-anim-del, 0s);
+}
+
+.sc-star-lg {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
+}
+
+.sc-star-bright {
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.95),
+        0 0 14px rgba(120, 255, 215, 0.35);
+}
+
+@keyframes sc-star-drift {
+    0% {
+        transform: translate3d(18vw, -10vh, 0);
+        opacity: 0.15;
+    }
+    18% {
+        opacity: 0.95;
+    }
+    100% {
+        transform: translate3d(-95vw, 38vh, 0);
+        opacity: 0.35;
+    }
+}

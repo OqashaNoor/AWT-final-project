@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Hub — Doctor Dashboard</title>
+    <link rel="stylesheet" href="css/smile-doctor-dashboard.css">
+</head>
+<body class="smile-doctor-app">
+    <aside class="sc-sidebar" id="scSidebar">
+        <div class="sc-brand">
+            <div class="sc-brand-main">Doctor Hub</div>
+            <div class="sc-brand-sub">Clinical Management</div>
+        </div>
+        <nav class="sc-nav">
+            <button type="button" class="sc-nav-item active" data-panel="dashboard" data-title="Clinical Overview">
+                <svg class="sc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Dashboard
+            </button>
+            <button type="button" class="sc-nav-item" data-panel="appointments" data-title="Appointments">
+                <svg class="sc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Appointments
+            </button>
+            <button type="button" class="sc-nav-item" data-panel="patients" data-title="Patients">
+                <svg class="sc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Patients
+            </button>
+            <button type="button" class="sc-nav-item" data-panel="settings" data-title="Settings">
+                <svg class="sc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                Settings
+            </button>
+        </nav>
+        <div class="sc-sidebar-footer">
+            <button type="button" class="sc-btn-teal-full" id="scBtnNewAppointment">
+                <span>+</span> New Appointment
+            </button>
+            <button type="button" class="sc-link-muted">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Help Center
+            </button>
+            <button type="button" class="sc-link-muted" onclick="logout()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sign Out
+            </button>
+        </div>
+    </aside>
+
+    <div class="sc-main">
+        <header class="sc-header">
+            <div class="sc-header-title-wrap">
+                <button type="button" class="sc-mobile-toggle sc-btn-outline" id="scSidebarToggle" aria-label="Menu">☰</button>
+                <h1 id="scHeaderTitle">Clinical Overview</h1>
+            </div>
+            <div class="sc-header-search">
+                <span class="sc-search-icon">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6b8286" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </span>
+                <input type="search" id="scPatientSearch" placeholder="Search patients or records..." autocomplete="off">
+            </div>
+            <div class="sc-header-right">
+                <button type="button" class="sc-theme-toggle" id="scDarkModeToggle" title="Dark mode" aria-label="Toggle dark mode">
+                    <svg class="sc-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="sc-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+                <span class="sc-datetime-pill" id="scDateTimePill">—</span>
+                <div class="sc-bell-wrap" aria-label="Notifications">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a2b2e" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="sc-notify-dot" aria-hidden="true"></span>
+                </div>
+                <div class="sc-user-mini">
+                    <img id="scHeaderAvatar" src="" alt="" style="display:none;">
+                    <div class="sc-mini-avatar" id="scHeaderAvatarInit">DR</div>
+                    <div>
+                        <div class="sc-mini-name" id="scHeaderDoctorName">Dr.</div>
+                        <div class="sc-mini-role" id="scHeaderDoctorRole">Chief surgeon</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="sc-content">
+            <!-- Dashboard overview -->
+            <div class="sc-panel active" id="panel-dashboard" data-panel="dashboard">
+                <div class="sc-row-top" id="scOverviewCards">
+                    <div class="sc-card-doctor">
+                        <div class="sc-doctor-photo-wrap">
+                            <div class="sc-doctor-photo-ph" id="scDoctorPhotoPh" aria-hidden="true"></div>
+                            <img class="sc-doctor-photo" id="scDoctorPhoto" alt="" width="112" height="112" decoding="async">
+                            <div class="sc-verified" aria-label="Verified" title="Verified">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                        </div>
+                        <div class="sc-doctor-meta">
+                            <h2 id="scDoctorInlineName">—</h2>
+                            <div class="sc-doctor-titles" id="scDoctorTitles">Chief surgeon · Senior physician</div>
+                            <p class="sc-doctor-bio" id="scDoctorBio">—</p>
+                            <div class="sc-doctor-stats-inline">
+                                <span><strong id="scExpYears">0</strong> yrs experience</span>
+                                <span>Avg. rating <strong id="scRatingAvg">—</strong></span>
+                            </div>
+                            <button type="button" class="sc-btn-outline" id="scViewProfileBtn">View Profile</button>
+                        </div>
+                    </div>
+                    <div class="sc-stat-teal">
+                        <svg class="sc-stat-bg-icon" viewBox="0 0 24 24" fill="white"><circle cx="8" cy="10" r="3"/><circle cx="16" cy="10" r="3"/></svg>
+                        <div class="sc-stat-label">Total patients</div>
+                        <div class="sc-stat-value" id="scStatTotalPatients">0</div>
+                        <div class="sc-stat-sub" id="scStatPatientsGrowth">+12% growth</div>
+                    </div>
+                    <div class="sc-stat-slate">
+                        <svg class="sc-stat-bg-icon" viewBox="0 0 24 24" fill="white"><rect x="4" y="5" width="16" height="15" rx="2"/></svg>
+                        <div class="sc-stat-label">Today's</div>
+                        <div class="sc-stat-value" id="scStatTodayApts">0</div>
+                        <div class="sc-stat-sub" id="scStatTodayCompleted">0 completed</div>
+                    </div>
+                    <div class="sc-stat-slate">
+                        <svg class="sc-stat-bg-icon" viewBox="0 0 24 24" fill="white"><rect x="3" y="6" width="18" height="14" rx="2"/></svg>
+                        <div class="sc-stat-label">Upcoming</div>
+                        <div class="sc-stat-value" id="scStatUpcoming">0</div>
+                        <div class="sc-stat-sub">Next 7 days</div>
+                    </div>
+                </div>
+
+                <div class="sc-registry">
+                    <div class="sc-registry-head">
+                        <div>
+                            <h3>Full Patient Registry</h3>
+                            <p>Active patient records and history</p>
+                        </div>
+                        <div class="sc-registry-actions">
+                            <select id="scRegistryFilter" class="sc-btn-filter" title="Filter by status">
+                                <option value="all">All statuses</option>
+                                <option value="Active">Active</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Urgent">Urgent</option>
+                            </select>
+                            <button type="button" class="sc-btn-teal-solid" id="scAddPatientBtn">+ Add Patient</button>
+                        </div>
+                    </div>
+                    <div class="sc-table-wrap">
+                        <table class="sc-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient name</th>
+                                    <th>Contact info</th>
+                                    <th>Last visit</th>
+                                    <th>Next appointment</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scRegistryBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="sc-bottom-row">
+                    <div class="sc-activity-card">
+                        <div class="sc-activity-head">
+                            <div>
+                                <h3>Clinical activity</h3>
+                                <p>Weekly appointment trends</p>
+                            </div>
+                            <div class="sc-toggle-group" id="scChartToggle">
+                                <button type="button" data-range="week" class="active">Week</button>
+                                <button type="button" data-range="month">Month</button>
+                            </div>
+                        </div>
+                        <div class="sc-chart-area" id="scChartArea"></div>
+                    </div>
+                    <div class="sc-quick-card">
+                        <div class="sc-quick-grid">
+                            <button type="button" class="sc-quick-action" id="qaNewPatient"><span class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></span>New patient</button>
+                            <button type="button" class="sc-quick-action" id="qaInvoice"><span class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>Invoice</button>
+                            <button type="button" class="sc-quick-action" id="qaRx"><span class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>Prescription</button>
+                            <button type="button" class="sc-quick-action" id="qaCase"><span class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>Case file</button>
+                        </div>
+                        <button type="button" class="sc-fab" id="scFabPlus" aria-label="Quick add">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointments -->
+            <div class="sc-panel" id="panel-appointments" data-panel="appointments">
+                <div class="sc-appt-toolbar">
+                    <p class="sc-appt-hint">Confirm or reject pending visits. Today&rsquo;s schedule updates live.</p>
+                    <select id="scApptStatusFilter" class="sc-btn-filter sc-appt-filter-select" aria-label="Filter appointments by status">
+                        <option value="all">All statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div id="scAppointmentsList" class="sc-appointments-board"></div>
+            </div>
+
+            <!-- Patients (registry focus) -->
+            <div class="sc-panel" id="panel-patients" data-panel="patients">
+                <div class="sc-registry">
+                    <div class="sc-registry-head">
+                        <div>
+                            <h3>Patient roster</h3>
+                            <p>Search and manage every patient tied to your practice</p>
+                        </div>
+                    </div>
+                    <div class="sc-table-wrap">
+                        <table class="sc-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient name</th>
+                                    <th>Contact info</th>
+                                    <th>Last visit</th>
+                                    <th>Next appointment</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scRegistryBodyPatients"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="sc-panel" id="panel-settings" data-panel="settings">
+                <div class="sc-registry sc-settings-form">
+                    <div class="sc-registry-head">
+                        <div>
+                            <h3>Profile &amp; clinic</h3>
+                            <p>Update how you appear across Doctor Hub</p>
+                        </div>
+                    </div>
+                    <form id="scProfileForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="scFullName">Full name</label>
+                                <input type="text" id="scFullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="scEmail">Email</label>
+                                <input type="email" id="scEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="scPhone">Phone</label>
+                                <input type="tel" id="scPhone">
+                            </div>
+                            <div class="form-group">
+                                <label for="scSpec">Specialization</label>
+                                <select id="scSpec">
+                                    <option value="General Medicine">General Medicine</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Pediatrics">Pediatrics</option>
+                                    <option value="Orthopedics">Orthopedics</option>
+                                    <option value="Dermatology">Dermatology</option>
+                                    <option value="Neurology">Neurology</option>
+                                    <option value="ENT">ENT</option>
+                                    <option value="General Surgery">General Surgery</option>
+                                    <option value="Psychiatry">Psychiatry</option>
+                                    <option value="Family Medicine">Family Medicine</option>
+                                    <option value="Emergency Medicine">Emergency Medicine</option>
+                                    <option value="Radiology">Radiology</option>
+                                    <option value="General Dentistry">General Dentistry</option>
+                                    <option value="Orthodontics">Orthodontics</option>
+                                    <option value="Periodontics">Periodontics</option>
+                                    <option value="Endodontics">Endodontics</option>
+                                    <option value="Oral Surgery">Oral Surgery</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="scYoE">Years of experience</label>
+                                <input type="number" id="scYoE" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="scLicense">License number</label>
+                                <input type="text" id="scLicense">
+                            </div>
+                            <div class="form-group" style="grid-column:1/-1">
+                                <label for="scBio">Professional bio</label>
+                                <textarea id="scBio"></textarea>
+                            </div>
+                            <div class="form-group" style="grid-column:1/-1">
+                                <label for="scProfileImageFile">Profile photo</label>
+                                <input type="file" id="scProfileImageFile" accept="image/*">
+                                <button type="button" class="sc-btn-teal-solid sc-photo-upload-btn" id="scUploadPhotoBtn">Upload photo</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="sc-btn-teal-full" style="max-width:200px;margin-top:1rem;">Save profile</button>
+                        <div id="scProfileMsg"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="scPatientHistoryModal" aria-hidden="true">
+        <div class="sc-modal-sheet">
+            <header>
+                <h3 id="scPatientModalTitle">Patient overview</h3>
+                <button type="button" class="sc-modal-close" onclick="closeScPatientModal()" aria-label="Close">×</button>
+            </header>
+            <div class="modal-body-scroll" id="scPatientHistoryBody"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="js/cosmos-starfield.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/smile-doctor-dashboard.js"></script>
+</body>
+</html>

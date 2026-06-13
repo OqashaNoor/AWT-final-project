@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Doctor Hub</title>
+    <link rel="stylesheet" href="css/patient-dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🏥</span>
+                    <h2>Doctor Hub</h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="doctors">
+                    <span class="nav-icon">👨‍⚕️</span>
+                    <span class="nav-text">Find Doctor</span>
+                </a>
+                <a href="#" class="nav-item" data-section="history">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Patient History</span>
+                </a>
+                <a href="#" class="nav-item" data-section="profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Patient Profile</span>
+                </a>
+            </nav>
+
+            <button id="logoutBtn" class="nav-logout">
+                <span class="nav-icon">🚪</span>
+                <span class="nav-text">Logout</span>
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="themeToggle" class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="dashboard-grid">
+                    <!-- Left Column -->
+                    <div class="dashboard-left">
+                        <!-- Greeting Card -->
+                        <div class="greeting-card">
+                            <div class="greeting-content">
+                                <h2 id="greetingName">Hello User</h2>
+                                <p class="greeting-quote">"A beautiful smile starts here."</p>
+                                <div class="greeting-buttons">
+                                    <button class="btn btn-primary" onclick="openBookAppointmentModal()">Book Consultation</button>
+                                    <button class="btn btn-secondary">View Records</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Appointments -->
+                        <div class="section-box">
+                            <div class="section-header">
+                                <h3>Upcoming Appointments</h3>
+                                <a href="#" class="view-calendar">View Calendar</a>
+                            </div>
+                            <div id="appointmentsList" class="appointments-list">
+                                <div class="loading">Loading appointments...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="dashboard-right">
+                        <!-- Date & Time Card -->
+                        <div class="date-time-card">
+                            <div class="date-moment">TODAY'S DATE</div>
+                            <div class="date-day" id="todayDay">Monday</div>
+                            <div class="date-value" id="todayDate">April 28, 2026</div>
+                            <div class="time-value" id="currentTime">10:45 AM</div>
+                        </div>
+
+                        <!-- Medical History Summary -->
+                        <div class="medical-summary">
+                            <h3>Medical History Summary</h3>
+                            
+                            <div class="summary-section">
+                                <div class="summary-label">ALLERGIES</div>
+                                <div id="allergiesList" class="summary-content">
+                                    <span class="no-data">No allergies recorded</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-section">
+                                <div class="summary-label">ONGOING TREATMENT</div>
+                                <div id="treatmentInfo" class="summary-content">
+                                    <span class="no-data">None</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-section">
+                                <div class="summary-label">BLOOD TYPE</div>
+                                <div id="bloodTypeInfo" class="summary-content">
+                                    <span class="blood-type">Unknown</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Section -->
+                <div class="dashboard-bottom">
+                    <!-- Health Card -->
+                    <div class="health-card">
+                        <div class="health-icon">🩺</div>
+                        <div class="health-content">
+                            <h4>Last Visit</h4>
+                        </div>
+                    </div>
+
+                    <!-- Rewards Card -->
+                    <div class="rewards-card">
+                        <div class="rewards-header">
+                            <span class="rewards-label">Reward Points</span>
+                            <span class="tier-badge">Silver Tier</span>
+                        </div>
+                        <div class="rewards-amount" id="rewardPoints">0</div>
+                        <div class="rewards-label-small">pts</div>
+                        <div class="rewards-progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Find Doctor Section -->
+            <section id="doctors-section" class="content-section">
+                <div class="find-doctor-header">
+                    <div class="doctor-stats">
+                        <div class="stat">
+                            <div class="stat-number" id="totalDoctors">0</div>
+                            <div class="stat-label">TOTAL DOCTORS</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">Today</div>
+                            <div class="stat-label">AVAILABILITY</div>
+                        </div>
+                        <div class="stat urgent">
+                            <div class="stat-content">Emergency Doctor Services</div>
+                            <button class="btn btn-sm" onclick="showEmergencyDoctors()">Emergency Doctor</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="doctorsList" class="doctors-grid">
+                    <div class="loading">Loading doctors...</div>
+                </div>
+            </section>
+
+            <!-- Emergency Doctors Section -->
+            <section id="emergency-section" class="content-section">
+                <div class="section-header emergency-header">
+                    <h2>Emergency Doctors</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="returnToDoctors()">Back to Find Doctor</button>
+                </div>
+                <p class="section-description">Showing 2-3 emergency doctors available for immediate consultation.</p>
+                <div id="emergencyDoctorsList" class="doctors-grid">
+                    <div class="loading">Loading emergency doctors...</div>
+                </div>
+            </section>
+
+            <!-- Patient History Section -->
+            <section id="history-section" class="content-section">
+                <div class="history-container">
+                    <div class="history-left">
+                        <h3>Add Medical History</h3>
+                        <form id="historyForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="disease">Disease / Condition</label>
+                                <input type="text" id="disease" name="disease" placeholder="Enter disease or condition" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="notes">Notes / Description</label>
+                                <textarea id="notes" name="notes" placeholder="Enter additional notes" rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="prescriptionImage">Upload Prescription Image</label>
+                                <input type="file" id="prescriptionImage" name="prescriptionImage" accept="image/*">
+                                <small>Optional: Upload prescription or medical document</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add History</button>
+                            <div id="historyMessage" class="message"></div>
+                        </form>
+                    </div>
+
+                    <div class="history-right">
+                        <h3>Previous History</h3>
+                        <div id="historyList" class="history-entries">
+                            <div class="loading">Loading history...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section">
+                <div class="profile-container">
+                    <div class="profile-left">
+                        <h3>Personal Information</h3>
+                        <p class="section-description">Update your contact details and medical alerts.</p>
+                        <form id="profileForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">Phone Number</label>
+                                <input type="tel" id="profilePhone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email Address</label>
+                                <input type="email" id="profileEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileAddress">Home Address</label>
+                                <textarea id="profileAddress" name="address" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileAge">Age</label>
+                                <input type="number" id="profileAge" name="age" min="0" placeholder="Enter age">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileGender">Gender</label>
+                                <select id="profileGender" name="gender">
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <div id="profileMessage" class="message"></div>
+                        </form>
+                    </div>
+
+                    <div class="profile-right">
+                        <!-- Patient Profile Card -->
+                        <div class="patient-profile-card">
+                            <div class="card-avatar" onclick="document.getElementById('profileImageUpload').click()" title="Click to upload profile image">
+                                <img id="profileCardImage" src="" alt="Profile" style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                <div id="profileCardPlaceholder" class="avatar-placeholder-card">👤</div>
+                            </div>
+                            <div class="card-info">
+                                <div class="card-name" id="profileCardName">Your Name</div>
+                                <div class="card-email" id="profileCardEmail">your@email.com</div>
+                                <div class="card-meta">
+                                    <span id="profileCardPhone">Phone: 000-000-0000</span>
+                                    <span id="profileCardGender">Gender: N/A</span>
+                                    <span id="profileCardPatientId">ID: N/A</span>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="file" id="profileImageUpload" accept="image/*" style="display: none;" />
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Book Appointment Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeBookAppointmentModal()">&times;</button>
+            <h2>Book Appointment</h2>
+            <form id="bookAppointmentForm">
+                <div class="form-group">
+                    <label for="appointmentDoctor">Select Doctor</label>
+                    <select id="appointmentDoctor" name="doctorId" required>
+                        <option value="">Choose a doctor...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <input type="date" id="appointmentDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Select Time Slot</label>
+                    <div id="timeSlotContainer" class="time-slots-grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: #999;">Select a date first</p>
+                    </div>
+                    <input type="hidden" id="appointmentTime" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTreatment">Treatment Type</label>
+                    <input type="text" id="appointmentTreatment" name="treatment" placeholder="e.g., Cleaning, Checkup">
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                <div id="bookingMessage" class="message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/cosmos-starfield.js"></script>
+    <script src="js/patient-dashboard.js"></script>
+</body>
+</html>
