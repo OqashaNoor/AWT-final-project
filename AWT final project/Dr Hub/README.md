@@ -1,152 +1,21 @@
-# Dental Care App
-
+#Dr Hub 
 A full-stack web application for managing dental clinic appointments, patient management, and doctor profiles.
+**Deployed Link**
 
-## Project Structure
 
-```
-dentist_app/
-├── backend/
-│   ├── config/
-│   │   └── db.js                 # MongoDB connection configuration
-│   ├── models/
-│   │   ├── User.js               # User schema (patients, doctors, admin)
-│   │   ├── Doctor.js             # Doctor profile schema
-│   │   └── Appointment.js        # Appointment schema
-│   ├── routes/
-│   │   ├── authRoutes.js         # Authentication endpoints
-│   │   ├── doctorRoutes.js       # Doctor management endpoints
-│   │   └── appointmentRoutes.js  # Appointment management endpoints
-│   ├── controllers/              # Business logic (to be implemented)
-│   └── server.js                 # Main server file
-├── frontend/
-│   ├── index.html                # Home page
-│   ├── auth.html                 # Login/Register page
-│   ├── patient-dashboard.html    # Patient dashboard
-│   ├── doctor-dashboard.html     # Doctor dashboard
-│   ├── profile.html              # User profile
-│   ├── appointment.html          # Appointment booking
-│   ├── css/
-│   │   └── style.css             # Styling
-│   ├── js/
-│   │   └── main.js               # Frontend JavaScript
-│   └── images/                   # Images and assets
-├── .env                          # Environment variables
-├── .gitignore                    # Git ignore file
-├── package.json                  # Dependencies
-└── README.md                     # Documentation
-```
+<img width="1366" height="768" alt="Screenshot (313)" src="https://github.com/user-attachments/assets/cfd25f9e-3d68-4b8a-8b35-4b03d853357a" />
+<img width="1366" height="768" alt="Screenshot (312)" src="https://github.com/user-attachments/assets/0fe0565d-da82-44e2-8ed7-ad43b56036b1" />
+<img width="1366" height="768" alt="Screenshot (311)" src="https://github.com/user-attachments/assets/db1db351-c195-4224-8b13-0c2d006f2af4" />
+<img width="1366" height="768" alt="Screenshot (310)" src="https://github.com/user-attachments/assets/e2e39eef-e6cb-4d16-a74e-51ca9f55f4a3" />
+<img width="1366" height="768" alt="Screenshot (309)" src="https://github.com/user-attachments/assets/39c2fde8-af5e-4e5c-bbf2-1621f9093f5f" />
+<img width="1366" height="768" alt="Screenshot (308)" src="https://github.com/user-attachments/assets/d510ffc9-9573-4919-9865-21bdc62c6a0f" />
+<img width="1366" height="768" alt="Screenshot (307)" src="https://github.com/user-attachments/assets/2f6b0c32-bb7a-4d54-b9e2-5c13a00ecbae" />
+<img width="1366" height="768" alt="Screenshot (305)" src="https://github.com/user-attachments/assets/f70d7d75-d084-4c9f-9877-d427fb1c41df" />
+<img width="1366" height="768" alt="Screenshot (304)" src="https://github.com/user-attachments/assets/ff75e97d-e545-49d7-8529-0fb8f7d623f1" />
+<img width="1366" height="768" alt="Screenshot (303)" src="https://github.com/user-attachments/assets/58f95cab-c05b-4c7c-9b4b-4f2e590ebc1d" />
+<img width="1366" height="768" alt="Screenshot (302)" src="https://github.com/user-attachments/assets/93563855-3de6-4f5a-8b61-ed14ecc6d040" />
+<img width="1366" height="768" alt="Screenshot (301)" src="https://github.com/user-attachments/assets/edca1fad-f940-4bf9-bf94-9b615087a0ef" />
+<img width="1366" height="768" alt="Screenshot (300)" src="https://github.com/user-attachments/assets/e8c4bb1a-8b40-4a13-bc5d-426ddc5b9c0f" />
+<img width="1366" height="768" alt="Screenshot (299)" src="https://github.com/user-attachments/assets/dfc74724-a102-4d41-a806-2c8044c515fb" />
+<img width="1366" height="768" alt="Screenshot (298)" src="https://github.com/user-attachments/assets/03f65da3-2cb6-405b-ab70-8fc9964e4ce5" />
 
-## Features
-
-### Backend
-- **Authentication**: User registration and login with JWT
-- **Doctor Management**: Create and manage doctor profiles with specializations
-- **Appointment System**: Book, reschedule, and cancel appointments
-- **Database**: MongoDB with Mongoose ODM
-- **Security**: Password hashing with bcryptjs
-
-### Frontend
-- **Responsive Design**: Mobile-friendly UI
-- **User Dashboard**: Different dashboards for patients and doctors
-- **Appointment Booking**: Easy appointment scheduling
-- **Profile Management**: User profile updates
-
-## Installation
-
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (local or cloud instance)
-- npm or yarn
-
-### Setup
-
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-2. **Configure Environment**
-   
-   Update `.env` file with your configuration:
-   ```
-   MONGODB_URI=mongodb://localhost:27017/dentist_app
-   PORT=5000
-   JWT_SECRET=your_secret_key
-   NODE_ENV=development
-   ```
-
-3. **Start MongoDB**
-   
-   Make sure MongoDB is running on your machine or update the connection string for MongoDB Atlas.
-
-4. **Run the Server**
-   ```bash
-   npm start
-   # or for development with auto-reload
-   npm run dev
-   ```
-
-   The server will start on `http://localhost:5000`
-
-## API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-
-### Doctors
-- `GET /api/doctors` - Get all doctors
-- `GET /api/doctors/:id` - Get doctor details
-- `POST /api/doctors` - Create doctor profile
-- `PUT /api/doctors/:id` - Update doctor profile
-- `GET /api/doctors/specialization/:spec` - Get doctors by specialization
-
-### Appointments
-- `GET /api/appointments` - Get all appointments
-- `GET /api/appointments/:id` - Get appointment details
-- `POST /api/appointments` - Book new appointment
-- `PUT /api/appointments/:id` - Update appointment
-- `DELETE /api/appointments/:id` - Cancel appointment
-- `GET /api/appointments/doctor/:doctorId` - Get doctor's appointments
-
-## Frontend Usage
-
-1. Navigate to `index.html` in your browser
-2. Login or register as a patient or doctor
-3. Access the dashboard based on your role
-4. Book or manage appointments
-
-## Technologies Used
-
-### Backend
-- Express.js - Web framework
-- MongoDB - Database
-- Mongoose - ODM
-- bcryptjs - Password hashing
-- jsonwebtoken - JWT authentication
-
-### Frontend
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- Fetch API for HTTP requests
-
-## Future Enhancements
-
-- [ ] Email notifications
-- [ ] SMS reminders
-- [ ] Payment integration
-- [ ] Doctor ratings and reviews
-- [ ] Medical records management
-- [ ] Online video consultation
-- [ ] Real-time notifications
-- [ ] Advanced scheduling
-
-## License
-
-ISC
-
-## Support
-
-For issues or questions, please create an issue in the repository.
