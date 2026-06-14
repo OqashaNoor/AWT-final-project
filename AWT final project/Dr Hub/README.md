@@ -1,6 +1,9 @@
 #Dr Hub 
 A full-stack web application for managing dental clinic appointments, patient management, and doctor profiles.
+
+
 **Deployed Link**
+https://ephemeral-douhua-390413.netlify.app/
 
 
 <img width="1366" height="768" alt="Screenshot (313)" src="https://github.com/user-attachments/assets/cfd25f9e-3d68-4b8a-8b35-4b03d853357a" />
